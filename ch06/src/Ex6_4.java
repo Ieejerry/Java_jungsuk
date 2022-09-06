@@ -8,6 +8,7 @@ public class Ex6_4 {
 		long result2 = mm.subtract(5L, 3L);
 		long result3 = mm.multiply(5L, 3L);
 		double result4 = mm.divide(5L, 3L);
+		mm.printGugudan(6);						// 구구단 6단을 출력
 		
 		System.out.println("max(5L, 3L) = " + result);
 		System.out.println("add(5L, 3L) = " + result1);
@@ -20,6 +21,15 @@ public class Ex6_4 {
 
 
 class MyMath {
+	void printGugudan(int dan) {
+		if(!(2 <= dan && dan <= 9)) return;	// 입력받은 dan이 2~9가 아니면, 메소드를 종료하고 돌아가기
+		
+		for(int i = 1; i <= 9; i++) {
+			System.out.printf("%d * %d = %d%n", dan, i, dan * i);
+		}
+		System.out.println();
+	}
+	
 	long add(long a, long b) {
 		long result = a + b;
 		return result;
@@ -27,7 +37,8 @@ class MyMath {
 	}
 	// 두 값을 받아서 둘중에 큰 값을 반환하는 메서드를 작성하시오.
 	long max(long a, long b) {
-		return a > b ? a : b;
+		if(a > b) return a;		// 조건식이 참일 때만 실행
+		else return b;			// 조건식이 거짓일 때 실행
 	}
 	long subtract(long a, long b) { return a - b; }
 	long multiply(long a, long b) { return a * b; }
