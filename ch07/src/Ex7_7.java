@@ -1,3 +1,5 @@
+import java.security.PublicKey;
+
 class Car {
 	String color;
 	int door;
@@ -20,13 +22,14 @@ class FireEngine extends Car {	// 소방차
 public class Ex7_7 {
 	public static void main(String[] args) {
 		Car car = null;
-		FireEngine fe = new FireEngine();
-		FireEngine fe2 = null;
+		FireEngine fe = new FireEngine();	// 실제 인스턴스가 무엇인지가 중요
 		
-		fe.water();
-		car = fe;	// car = (Car)fe;에서 형변환 생략됨
-//		car.water();	// 컴파일 에러. Car타입의 참조변수로는 water()를 호출할 수 없다.
-		fe2 = (FireEngine)car;	// 자손타입 ← 조상타입. 형변환 생략 불가
-		fe2.water();
+		FireEngine fe2 = (FireEngine)car;	// 조상 -> 자손으로 형변환
+		Car car2 = (Car)fe2;	// 자손 -> 조상으로 형변환
+//		car2.drive();	// NullpointerException 발생
+		
+		Car c = new Car();
+//		FireEngine f = (FireEngine)c;	// 형변환 실행 에러. java.lang.ClassCastException
+//		f.water();	// 컴파일 OK
 	}
 }
