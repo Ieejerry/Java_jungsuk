@@ -9,7 +9,7 @@ public class Ex10_7 {
 			Number num = df.parse("1,234,567.89");
 			System.out.print("1,234,567.89" + " -> ");
 			
-			double d = num.doubleValue();
+			double d = num.doubleValue();	// d = 1234567.89
 			System.out.print(d + " -> ");
 			
 			System.out.println(df2.format(num));
