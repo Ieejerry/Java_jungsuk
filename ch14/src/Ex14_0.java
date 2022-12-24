@@ -1,22 +1,36 @@
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 public class Ex14_0 {
 	public static void main(String[] args) {
-//		Object obj = (a, b) -> a > b ? a : b;	// 람다식. 익명객체
-//		MyFunction2 f = new MyFunction2() {
-//			public int max(int a, int b) {	// 오버라이딩 - 접근제어자는 좁게 못 바꾼다.
-//				return a > b ? a : b;
-//			}
-//		};
+//		Function<String, Integer> f = (String s) -> Integer.parseInt(s);
+//		Function<String, Integer> f = 클래스이름::메소드이름;
+		Function<String, Integer> f = Integer::parseInt;	// 메소드 참조
+		System.out.println(f.apply("100") + 200);
 		
-		// 람다식(익명 객체)을 다루기 위한 참조변수의 타입은 함수형 인터페이스로 한다.
-		MyFunction2 f = (a, b) -> a > b ? a : b;	// 람다식. 익명객체
+		// Supplier는 입력 X, 출력 O
+//		Supplier<MyClass> s = () -> new MyClass();
+//		Supplier<MyClass> s = MyClass::new;
 		
-		int value = f.max(3, 5);	// 함수형 인터페이스
-		System.out.println("value = " + value);
+//		Function<Integer, MyClass> f2 = (i) -> new MyClass(i);
+		Function<Integer, MyClass> f2 = MyClass::new;
+		
+		MyClass mc = f2.apply(100);
+		System.out.println(mc.iv);
+		
+		System.out.println(f2.apply(200).iv);
+		
+//		Function<Integer, int[]> f3 = (i) -> new int[i];
+		Function<Integer, int[]> f3 = int[]::new;	// 메소드 참조
+		int[] arr = f3.apply(100);
+		System.out.println("arr.length = " + arr.length);
 	}
 }
 
-@FunctionalInterface	// 함수형 인터페이스는 단 하나의 추상 메소드만 가져야 함
-interface MyFunction2 {
-//	public abstract int max(int a, int b);
-	int max(int a, int b);
+class MyClass {
+	int iv;
+	
+	MyClass(int iv) {
+		this.iv = iv;
+	}
 }
